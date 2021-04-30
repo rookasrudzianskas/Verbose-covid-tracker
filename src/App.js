@@ -1,5 +1,5 @@
 import './App.css';
-import {FormControl, MenuItem, Select, Card, CardContent} from "@material-ui/core";
+import {FormControl, MenuItem, Select, Card, CardContent, Table} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
@@ -8,6 +8,7 @@ function App() {
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
+    const [tableData, setTableData] = useState([]);
 
     // https://disease.sh/v3/covid-19/countries
     // then the app inisitialy loads, the request will be made, and the all data is going to be received
@@ -38,6 +39,8 @@ function App() {
                             name: country.country, // United States, India
                             value: country.countryInfo.iso2 // UK, USA, FR
                         }));
+                    // also sets the received data to the tableData
+                    setTableData(data);
                     // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
                 });
@@ -104,7 +107,7 @@ function App() {
 
             <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
 
-            <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
+            <InfoBox title="Coronavirus Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
 
             <InfoBox title="Coronavirus Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
 
@@ -122,6 +125,9 @@ function App() {
             <CardContent>
 
                 <h3>Live Cases By Country</h3>
+
+                <Table countries={tableData}/>
+
                 <h3>Worldwide new cases</h3>
                 {/*    table    */}
                 {/*    Graph    */}
