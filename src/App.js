@@ -6,6 +6,8 @@ import Map from "./Map";
 import Table from "./Table";
 import {sortData} from "./util";
 import LineGraph from "./LineGraph";
+// they do not tell you, that you have to import it
+import "leaflet/dist/leaflet.css";
 
 function App() {
     const [countries, setCountries] = useState([]);
@@ -95,7 +97,7 @@ function App() {
         {/* the start of the left section*/}
         <div className="app__left">
         <div className="app__header">
-      <h1>COVID-21 TRACKER</h1>
+      <h1>ROOKAS COVID-21 TRACKER</h1>
         <FormControl className="app__dropdown">
             {/* at first it is going to show the worldwide, because it is going to be first one in array, and on the top shows */}
             {/* the country which is first, but then we click on some of them, the onCountryChange gets excecuted.*/}
@@ -147,8 +149,8 @@ function App() {
                     <Table countries={tableData}/>
 
                 <h3>Worldwide new cases</h3>
+                {/* Line Graph*/}
                 <LineGraph />
-                {/*    Graph    */}
             </CardContent>
 
 
