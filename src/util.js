@@ -1,6 +1,7 @@
 import { Circle, Popup } from "react-leaflet";
 import React from "react";
 import numeral from "numeral";
+import "./utils.css";
 
 // this is the object, with colors, and the number which represent of how big number to multiply for particular case
 const casesTypeColors = {
