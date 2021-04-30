@@ -1,9 +1,17 @@
 import './App.css';
 import {FormControl, MenuItem, Select} from "@material-ui/core";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
     const [countries, setCountries] = useState(['USA']);
+
+    // https://disease.sh/v3/covid-19/countries
+
+    useEffect(() => {
+        // Thee code inside will run once the component loads, and not again after
+
+    }, [countries])
+
 
   return (
     <div className="app">
