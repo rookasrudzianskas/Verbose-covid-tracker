@@ -6,7 +6,8 @@ import Map from "./Map";
 
 function App() {
     const [countries, setCountries] = useState([]);
-    const [country, setCountry] = useState('worldwide')
+    const [country, setCountry] = useState('worldwide');
+    const [countryInfo, setCountryInfo] = useState({});
 
     // https://disease.sh/v3/covid-19/countries
 
@@ -39,6 +40,24 @@ function App() {
     const onCountryChange = async (event) => {
         const countryCode = event.target.value;
         setCountry(countryCode);
+
+        /// checking to which link to go
+
+        const url = countryCode === "worldwide" ? 'https://disease.sh/v3/covid-19/all' :
+            `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+        // https://disease.sh/v3/covid-19/all
+        // https://disease.sh/v3/covid-19/countries
+        // making another call to make get the info by the country
+
+        await fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // we got all the data and set to country info state
+                setCountry(countryCode);
+                // All of the fetched data
+                setCountryInfo(data);
+            })
     };
 
 
