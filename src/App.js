@@ -9,11 +9,17 @@ import LineGraph from "./LineGraph";
 // they do not tell you, that you have to import it
 import "leaflet/dist/leaflet.css";
 
+
+
 function App() {
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([]);
+    // giving the exact coordinates, the center of the world, it loads at this point
+    const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+    // zooms out to the point, we can see whole map
+    const [mapZoom, setMapZoom] = useState(3);
 
     // ===================== The first useEffect to get all the countries then app loads =========================//
     // https://disease.sh/v3/covid-19/countries
@@ -134,7 +140,7 @@ function App() {
     {/*    map*/}
 
         </div>
-        <Map />
+        <Map center={mapCenter} zoom={mapZoom}/>
         </div>
         {/* the section left end*/}
 
