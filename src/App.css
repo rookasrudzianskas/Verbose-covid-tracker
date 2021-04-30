@@ -5,6 +5,9 @@
 body {
   background: #f5f6fa;
 }
+.app {
+  display: flex;
+}
 
 .app__header {
   display: flex;
