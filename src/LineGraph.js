@@ -103,6 +103,7 @@ function LineGraph({ casesType }) {
 
     return (
         <div>
+            {/* this checks if data actually exists, if it is false, it just returns the same data, not freaks out*/}
             {data?.length > 0 && (
                 <Line
                     data={{
