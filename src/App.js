@@ -77,13 +77,6 @@ function App() {
 
             <InfoBox title="Coronavirus Deaths" total={342343} cases={4324}/>
 
-            {/*    info boxes title="coronavirus cases" */}
-
-
-
-            {/*    info boxes */}
-            {/*    info boxes* and so on/}
-        </div>
 
 
     {/*    table    */}
