@@ -27,7 +27,7 @@ export const sortData = (data) => {
 };
 
 // Draw circles on the map with interactive tooltip
-export const showDataOnMap = (data, casesType='cases') => (
+export const showDataOnMap = (data, casesType='cases') =>
     data.map(country => (
         // draws the circle and takes these attributes
         <Circle
@@ -35,13 +35,14 @@ export const showDataOnMap = (data, casesType='cases') => (
             color={casesTypeColors[casesType].hex}
             fillColor={casesTypeColors[casesType].hex}
             fillOpacity={0.4}
-            {/* the radius is magic thing, it takes the number of cases for that country that day, and multiplies, by the multiplier from the*/}
-            {/* object which is called casesTypeColors above */}
+             // the radius is magic thing, it takes the number of cases for that country that day, and multiplies, by the multiplier from the
+             // object which is called casesTypeColors above
             radius={
                 Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
             }
         >
-
+        <Popup>
+            <h1>I am poppup</h1>
+        </Popup>
         </Circle>
-    ))
-);
+    ));
