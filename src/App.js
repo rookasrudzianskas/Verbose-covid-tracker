@@ -20,14 +20,17 @@ function App() {
                 // mapping throug all the countries in the json object, to make the array of countries, which consist of objects
                 // which has name and value
                 .then((data) => {
+                    // making the array of countries, by mapping through data, and making countries = [{name:..., value:...}]
                     const countries = data.map((country) => (
                         {
                             name: country.country, // United States, India
                             value: country.countryInfo.iso2 // UK, USA, FR
                         }));
+                    // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
                 });
         };
+        // at this point we just call as function to make the api call
         getCountriesData();
     }, []);
 
@@ -42,8 +45,14 @@ function App() {
         <div className="app__header">
       <h1>COVID-21 TRACKER</h1>
         <FormControl className="app__dropdown">
+            {/* at first it is going to show the worldwide, because it is going to be first one in array, and on the top shows */}
+            {/* the country which is first, but then we click on some of them, the onCountryChange gets excecuted.*/}
+            {/* meaning, onCountryChange takes the event with all the data, and sets the country code to the country code of the event data*/}
+            {/* and sets up the country state, with setCountry to the country name */}
+            {/* on select the value is country, so from the state arrives the updated value*/}
             <Select variant="outlined" value={country} onChange={onCountryChange}>
                 {/* loop thought all the countries and show the a drop down of possible options*/}
+                {/* worldwide is the default option, meaning it is going to be the first one, and always there will be*/}
                 <MenuItem value="worldwide">Worldwide</MenuItem>
                 {
                     countries.map(country => (
@@ -59,15 +68,22 @@ function App() {
             </Select>
         </FormControl>
         </div>
+        <div className="app__stats">
 
-    {/*    info boxes*/}
-    {/*    info boxes*/}
-    {/*    info boxes*/}
+            {/*    info boxes title="coronavirus cases" */}
+
+
+
+            {/*    info boxes */}
+            {/*    info boxes* and so on/}
+        </div>
+
 
     {/*    table    */}
     {/*    Graph    */}
 
     {/*    map*/}
+        </div>
     </div>
   );
 }
