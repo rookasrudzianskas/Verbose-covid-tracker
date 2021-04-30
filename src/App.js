@@ -1,8 +1,9 @@
 import './App.css';
-import {FormControl, MenuItem, Select, Card, CardContent, Table} from "@material-ui/core";
+import {FormControl, MenuItem, Select, Card, CardContent} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
+import Table from "./Table";
 
 function App() {
     const [countries, setCountries] = useState([]);
@@ -12,7 +13,7 @@ function App() {
 
     // ===================== The first useEffect to get all the countries then app loads =========================//
     // https://disease.sh/v3/covid-19/countries
-    // then the app inisitialy loads, the request will be made, and the all data is going to be received
+    // then the app initially loads, the request will be made, and the all data is going to be received
     useEffect(() => {
         fetch('https://disease.sh/v3/covid-19/all')
             .then(response => response.json())
@@ -26,7 +27,7 @@ function App() {
 
 
 
-    // ===================== The Seccond useEffect to get all the countries the names to put in the list =========================//
+    // ===================== The Second useEffect to get all the countries the names to put in the list =========================//
 
     useEffect(() => {
         // Thee code inside will run once the component loads, and not again after
@@ -47,9 +48,8 @@ function App() {
                             value: country.countryInfo.iso2 // UK, USA, FR
                         }));
                     // also sets the received data to the tableData
-                    // in this case it gets to the data and put the following name:
-                    // country.country, // United States, India
-                    // value: country.countryInfo.iso2 // UK, USA, FR ✍️
+                    // in this case it gets all the data, all, and puts it into the Tabledata state
+                    //
                     setTableData(data);
                     // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
