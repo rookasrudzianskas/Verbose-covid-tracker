@@ -10,6 +10,15 @@ function App() {
     const [countryInfo, setCountryInfo] = useState({});
 
     // https://disease.sh/v3/covid-19/countries
+    // then the app inisitialy loads, the request will be made, and the all data is going to be received
+    useEffect(() => {
+        fetch('https://disease.sh/v3/covid-19/all')
+            .then(response => response.json())
+            .then(data => {
+                // and set to the country info variable
+                setCountryInfo(data);
+            })
+    }, []);
 
     useEffect(() => {
         // Thee code inside will run once the component loads, and not again after
@@ -93,11 +102,11 @@ function App() {
         </div>
         <div className="app__stats">
 
-            <InfoBox title="Coronavirus Cases" total={4324234} cases={34234}/>
+            <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
 
-            <InfoBox title="Recovered" total={3423432} cases={43243}/>
+            <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
 
-            <InfoBox title="Coronavirus Deaths" total={342343} cases={4324}/>
+            <InfoBox title="Coronavirus Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
 
 
     {/*    map*/}
