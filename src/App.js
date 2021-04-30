@@ -18,8 +18,8 @@ function App() {
     const [tableData, setTableData] = useState([]);
     // giving the exact coordinates, the center of the world, it loads at this point
     const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
-    // zooms out to the point, we can see whole map
     const [mapZoom, setMapZoom] = useState(3);
+    // console.log('🗺️', mapCenter, mapZoom);
 
     // ===================== The first useEffect to get all the countries then app loads =========================//
     // https://disease.sh/v3/covid-19/countries
@@ -68,7 +68,7 @@ function App() {
                     setCountries(countries);
                 });
         };
-        // at this point we just call as function to make the api call
+        // at this point we just call as fusnction to make the api call
         getCountriesData();
     }, []);
 
@@ -94,6 +94,10 @@ function App() {
                 setCountry(countryCode);
                 // All of the fetched data
                 setCountryInfo(data);
+
+                // greetting the coordinates from the data api
+                setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+                setMapZoom(4);
             });
     };
     console.log(countryInfo);
