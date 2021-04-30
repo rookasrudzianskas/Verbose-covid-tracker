@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
 import Table from "./Table";
+import {sortData} from "./util";
 
 function App() {
     const [countries, setCountries] = useState([]);
@@ -47,10 +48,13 @@ function App() {
                             name: country.country, // United States, India
                             value: country.countryInfo.iso2 // UK, USA, FR
                         }));
+
+                    // before setting the state, we have to sort
+                    const sortedData = sortData(data);
                     // also sets the received data to the tableData
                     // in this case it gets all the data, all, and puts it into the Tabledata state
                     //
-                    setTableData(data);
+                    setTableData(sortedData);
                     // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
                 });
