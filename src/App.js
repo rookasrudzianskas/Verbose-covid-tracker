@@ -57,9 +57,9 @@ function App() {
                 setCountry(countryCode);
                 // All of the fetched data
                 setCountryInfo(data);
-            })
+            });
     };
-
+    console.log(countryInfo);
 
   return (
     <div className="app">
