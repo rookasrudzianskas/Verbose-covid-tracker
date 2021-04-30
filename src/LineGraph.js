@@ -47,21 +47,30 @@ const options = {
     },
 };
 
-const buildChartData = (data, casesType) => {
-    let chartData = [];
-    let lastDataPoint;
-    for (let date in data.cases) {
-        if (lastDataPoint) {
-            let newDataPoint = {
-                x: date,
-                y: data[casesType][date] - lastDataPoint,
-            };
-            chartData.push(newDataPoint);
+const buildChartData = (data, casesType = 'cases') => {
+        let chartData = [];
+        // the object which is currently empty
+        let lastDataPoint;
+        // it is going to per each date and make it as the coors, then push to new array
+        for (let date in data.cases) {
+            if (lastDataPoint) {
+                let newDataPoint = {
+                    x: date,
+                    // y because we are going to show it for the cases, and it goes to the data object, to the cases, to the cases date, and
+//                 // - the lastDataPoint. We do so, because we want to get the differece between two dates, how much it decreased or increased
+//                 // the lastDataPoint, is the number of current iteration date cases amount number
+//                 // basically y becomes the difference between last day and the current day
+//                 // data, the cases, because we are going to show the chart for the data and not for deaths or something like that
+                    y: data[casesType][date] - lastDataPoint,  // the difference between the last day, and the next day. shows all the new cases
+                };
+                // we push the formed x and y to the newly formed chart data array
+                chartData.push(newDataPoint);
+            }
+            // we just update the lasst dataa point, to the next day,
+            lastDataPoint = data[casesType][date];  // sets the last date to the next day
         }
-        lastDataPoint = data[casesType][date];
-    }
-    return chartData;
-};
+        return chartData;
+    };
 
 
 function LineGraph({ casesType }) {
@@ -89,7 +98,7 @@ function LineGraph({ casesType }) {
                 .then((data) => {
                     console.log(data);
                     // clever stuff with data
-                    let chartData = buildChartData(data, 'cases');
+                    let chartData = buildChartData(data, casesType);
                     // we fire the buildchart data function to reformat the data to make the chart
                     setData(chartData);
 
@@ -103,11 +112,9 @@ function LineGraph({ casesType }) {
 
     return (
         <div>
-            {/* this checks if data actually exists, if it is false, it just returns the same data, not freaks out*/}
             {data?.length > 0 && (
                 <Line
                     data={{
-                        // we pass the data and some table colors in the dataset
                         datasets: [
                             {
                                 backgroundColor: "rgba(204, 16, 52, 0.5)",
