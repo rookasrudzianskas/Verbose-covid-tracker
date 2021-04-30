@@ -2,24 +2,18 @@ import { Circle, Popup } from "react-leaflet";
 import React from "react";
 import numeral from "numeral";
 
-
+// this is the object, with colors, and the number which represent of how big number to multiply for particular case
 const casesTypeColors = {
     cases: {
         hex: "#CC1034",
-        rgb: "rgb(204, 16, 52)",
-        half_op: "rgba(204, 16, 52, 0.5)",
         multiplier: 800,
     },
     recovered: {
         hex: "#7dd71d",
-        rgb: "rgb(125, 215, 29)",
-        half_op: "rgba(125, 215, 29, 0.5)",
         multiplier: 1200,
     },
     deaths: {
         hex: "#fb4443",
-        rgb: "rgb(251, 68, 67)",
-        half_op: "rgba(251, 68, 67, 0.5)",
         multiplier: 2000,
     },
 };
@@ -35,11 +29,17 @@ export const sortData = (data) => {
 // Draw circles on the map with interactive tooltip
 export const showDataOnMap = (data, casesType='cases') => (
     data.map(country => (
+        // draws the circle and takes these attributes
         <Circle
             center={[country.countryInfo.lat, country.countryInfo.long]}
             color={casesTypeColors[casesType].hex}
             fillColor={casesTypeColors[casesType].hex}
             fillOpacity={0.4}
+            {/* the radius is magic thing, it takes the number of cases for that country that day, and multiplies, by the multiplier from the*/}
+            {/* object which is called casesTypeColors above */}
+            radius={
+                Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
+            }
         >
 
         </Circle>
