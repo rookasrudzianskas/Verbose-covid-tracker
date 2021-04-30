@@ -3,7 +3,7 @@ import { MapContainer as LeafletMap, TileLayer } from "react-leaflet";
 import "./Map.css";
 // import { showDataOnMap } from "./util";
 
-function Map({center, zoom }) {
+function Map({countries, center, zoom }) {
     return (
         <div className="map">
             {/* center is the center, where actually the app starts*/}
@@ -11,7 +11,9 @@ function Map({center, zoom }) {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                {/* lopp thought the countries and draw circles in the map*/}
                 {/*{showDataOnMap(countries, casesType)}*/}
+
             </LeafletMap>
         </div>
     );

@@ -15,6 +15,7 @@ function App() {
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
+    const [mapCountries, setMapCountries] = useState([]);
     const [tableData, setTableData] = useState([]);
     // giving the exact coordinates, the center of the world, it loads at this point
     const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
@@ -64,6 +65,7 @@ function App() {
                     // in this case it gets all the data, all, and puts it into the Tabledata state
                     //
                     setTableData(sortedData);
+                    setMapCountries(data)
                     // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
                 });
@@ -144,7 +146,7 @@ function App() {
     {/*    map*/}
 
         </div>
-        <Map center={mapCenter} zoom={mapZoom}/>
+        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries}/>
         </div>
         {/* the section left end*/}
 
