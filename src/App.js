@@ -10,6 +10,7 @@ function App() {
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([]);
 
+    // ===================== The first useEffect to get all the countries then app loads =========================//
     // https://disease.sh/v3/covid-19/countries
     // then the app inisitialy loads, the request will be made, and the all data is going to be received
     useEffect(() => {
@@ -20,6 +21,12 @@ function App() {
                 setCountryInfo(data);
             })
     }, []);
+
+    // ===================== end of The first useEffect to get all the countries then app loads =========================//
+
+
+
+    // ===================== The Seccond useEffect to get all the countries the names to put in the list =========================//
 
     useEffect(() => {
         // Thee code inside will run once the component loads, and not again after
@@ -40,6 +47,9 @@ function App() {
                             value: country.countryInfo.iso2 // UK, USA, FR
                         }));
                     // also sets the received data to the tableData
+                    // in this case it gets to the data and put the following name:
+                    // country.country, // United States, India
+                    // value: country.countryInfo.iso2 // UK, USA, FR ✍️
                     setTableData(data);
                     // it finishes and we are ready to add all the countries array to the state to the countries, by using set Countries
                     setCountries(countries);
@@ -48,6 +58,8 @@ function App() {
         // at this point we just call as function to make the api call
         getCountriesData();
     }, []);
+
+    // ===================== end of The Seccond useEffect to get all the countries the names to put in the list =========================//
 
     const onCountryChange = async (event) => {
         const countryCode = event.target.value;
@@ -125,8 +137,8 @@ function App() {
             <CardContent>
 
                 <h3>Live Cases By Country</h3>
-
-                <Table countries={tableData}/>
+                    {/* This forms the data table */}
+                    <Table countries={tableData}/>
 
                 <h3>Worldwide new cases</h3>
                 {/*    table    */}
