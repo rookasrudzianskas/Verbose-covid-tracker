@@ -96,6 +96,7 @@ function LineGraph({ casesType }) {
                     return response.json();
                 })
                 .then((data) => {
+                    console.log(data);
                     // clever stuff with data
                     let chartData = buildChartData(data, casesType);
                     // we fire the buildchart data function to reformat the data to make the chart
