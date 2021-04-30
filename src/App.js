@@ -29,7 +29,12 @@ function App() {
                 });
         };
         getCountriesData();
-    }, [])
+    }, []);
+
+    const onCountryChange = async (event) => {
+        const countryCode = event.target.value;
+        setCountry(countryCode);
+    };
 
 
   return (
@@ -37,7 +42,7 @@ function App() {
         <div className="app__header">
       <h1>COVID-21 TRACKER</h1>
         <FormControl className="app__dropdown">
-            <Select variant="outlined" value={country}>
+            <Select variant="outlined" value={country} onChange={onCountryChange}>
                 {/* loop thought all the countries and show the a drop down of possible options*/}
                 <MenuItem value="worldwide">Worldwide</MenuItem>
                 {
@@ -54,9 +59,6 @@ function App() {
             </Select>
         </FormControl>
         </div>
-
-    {/*    Header   */}
-    {/*    Title and select input dropdown field    */}
 
     {/*    info boxes*/}
     {/*    info boxes*/}
